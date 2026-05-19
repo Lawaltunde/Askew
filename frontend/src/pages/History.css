@@ -1,0 +1,215 @@
+.history {
+  flex: 1;
+  max-width: 640px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 24px 80px;
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+
+.history-header {
+  padding: 56px 0 36px;
+}
+
+.history-title {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: -0.4px;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.history-sub {
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.history-count {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 14px;
+}
+
+/* ── List ──────────────────────────────────────────────────── */
+
+.history-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  animation: slideUp 0.25s ease both;
+  animation-delay: calc(var(--idx) * 40ms);
+}
+
+/* ── Item header (accordion trigger) ──────────────────────── */
+
+.item-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.item-header:hover { background: var(--bg); }
+
+.item-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.item-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-3);
+  flex-shrink: 0;
+}
+
+.item-role {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.item-date {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.chevron {
+  color: var(--ink-3);
+  transition: transform 0.2s ease;
+}
+
+.chevron.open { transform: rotate(180deg); }
+
+/* ── Expanded questions ────────────────────────────────────── */
+
+.item-questions {
+  list-style: none;
+  border-top: 1px solid var(--border);
+  padding: 0 20px 4px;
+  animation: fadeIn 0.2s ease;
+}
+
+.item-question {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.65;
+}
+
+.item-question:last-child { border-bottom: none; }
+
+.item-q-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-3);
+  padding-top: 3px;
+  flex-shrink: 0;
+  width: 14px;
+}
+
+/* ── Skeleton ──────────────────────────────────────────────── */
+
+.skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-row {
+  height: 62px;
+  background: linear-gradient(90deg, var(--border) 25%, #EEEDEA 50%, var(--border) 75%);
+  background-size: 200% 100%;
+  border-radius: var(--radius-md);
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* ── Empty state ───────────────────────────────────────────── */
+
+.empty-state {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.empty-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink-2);
+  margin-bottom: 8px;
+}
+
+.empty-sub {
+  font-size: 14px;
+  color: var(--ink-3);
+}
+
+/* ── Error ─────────────────────────────────────────────────── */
+
+.error-banner {
+  padding: 14px 16px;
+  background: var(--error-bg);
+  border: 1px solid var(--error-border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--error-text);
+}
+
+/* ── Animations ────────────────────────────────────────────── */
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (max-width: 520px) {
+  .history-header { padding: 36px 0 28px; }
+  .item-date { display: none; }
+}
