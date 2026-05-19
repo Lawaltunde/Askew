@@ -84,6 +84,32 @@ class InterviewControllerTest {
     }
 
     @Test
+    void generate_returns400ForNumericOnlyInput() throws Exception {
+        mockMvc.perform(post("/api/v1/interviews/generate")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"jobTitle\": \"123\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value(
+                        "Please enter a valid job title (e.g. Software Engineer, Data Scientist)"));
+    }
+
+    @Test
+    void generate_returns400ForSpecialCharactersOnly() throws Exception {
+        mockMvc.perform(post("/api/v1/interviews/generate")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"jobTitle\": \"!!!\"}"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void generate_returns400ForInputEndingWithNumber() throws Exception {
+        mockMvc.perform(post("/api/v1/interviews/generate")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"jobTitle\": \"Engineer1\"}"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
     void generate_responseContainsCorrectQuestions() throws Exception {
         when(interviewService.generate(any(InterviewRequest.class)))
                 .thenReturn(new InterviewResponse("DevOps Engineer", QUESTIONS));
