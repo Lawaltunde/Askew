@@ -3,19 +3,17 @@
 :root {
   --bg:           #F5F4F0;
   --surface:      #FFFFFF;
-  --ink:          #111111;
-  --ink-2:        #555555;
-  --ink-3:        #999999;
-  --border:       #E4E3DE;
-  --border-hover: #BBBAB5;
-  --accent:       #111111;
-  --accent-hover: #2D2D2D;
+  --ink:          #111111;   /* 18.88:1 on white ✓ */
+  --ink-2:        #444444;   /* 9.73:1 on white  ✓ */
+  --ink-3:        #6B6B6B;   /* 5.33:1 on white  ✓  was #999 (2.85 — fail) */
+  --border:       #DDDCD7;
+  --border-hover: #AEADA8;
   --error-bg:     #FEF2F2;
   --error-border: #FECACA;
   --error-text:   #B91C1C;
   --radius-sm:    8px;
   --radius-md:    14px;
-  --shadow:       0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+  --shadow:       0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.07);
   --sans:         'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --serif:        'DM Serif Display', Georgia, serif;
   --mono:         'SF Mono', 'Fira Code', monospace;
@@ -33,3 +31,10 @@ body {
 
 a { color: inherit; text-decoration: none; }
 button { font-family: var(--sans); }
+
+/* Global accessible focus ring */
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 4px;
+}

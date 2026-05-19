@@ -91,7 +91,11 @@
 }
 
 .text-input::placeholder { color: #C8C7C1; }
-.text-input:focus { border-color: var(--border-hover); }
+.text-input:focus {
+  border-color: var(--ink);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(17,17,17,0.08);
+}
 .text-input:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .submit-btn {
@@ -112,8 +116,13 @@
   transition: background 0.15s, opacity 0.15s;
 }
 
-.submit-btn:hover:not(:disabled) { background: var(--accent-hover); }
-.submit-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.submit-btn:hover:not(.submit-btn--loading):not(:disabled) { background: var(--accent-hover); }
+.submit-btn:disabled:not(.submit-btn--loading) { opacity: 0.35; cursor: not-allowed; }
+.submit-btn--loading {
+  background: var(--accent-hover);
+  cursor: wait;
+  opacity: 1;
+}
 
 .char-count {
   font-size: 11px;
@@ -219,6 +228,72 @@
 }
 
 .try-again-btn:hover { color: var(--ink); }
+
+/* ── Skeleton ──────────────────────────────────────────────── */
+
+.skeleton-section {
+  animation: fadeIn 0.2s ease;
+}
+
+.skeleton-tag {
+  display: inline-block;
+  width: 72px;
+  height: 20px;
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.skeleton-title {
+  display: inline-block;
+  width: 200px;
+  height: 26px;
+  background: var(--border);
+  border-radius: 6px;
+  margin-left: 12px;
+  vertical-align: middle;
+}
+
+.skeleton-item {
+  animation: slideUp 0.25s ease both;
+  animation-delay: calc(var(--i) * 60ms);
+}
+
+.skeleton-num {
+  display: block;
+  width: 20px;
+  height: 14px;
+  background: var(--border);
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.skeleton-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 2px;
+}
+
+.skeleton-line {
+  display: block;
+  height: 14px;
+  background: linear-gradient(
+    90deg,
+    var(--border) 25%,
+    #EEEDEA 50%,
+    var(--border) 75%
+  );
+  background-size: 200% 100%;
+  border-radius: 4px;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
 
 /* ── Spinner ───────────────────────────────────────────────── */
 

@@ -67,8 +67,9 @@ export default function Home() {
             />
             <button
               type="submit"
-              className="submit-btn"
-              disabled={loading || !jobTitle.trim()}
+              className={`submit-btn ${loading ? 'submit-btn--loading' : ''}`}
+              disabled={!jobTitle.trim()}
+              aria-busy={loading}
             >
               {loading ? <><SpinnerIcon /> Generating…</> : 'Generate'}
             </button>
@@ -84,7 +85,9 @@ export default function Home() {
         )}
       </section>
 
-      {result && (
+      {loading && <SkeletonResults />}
+
+      {result && !loading && (
         <section className="results-section">
           <div className="results-meta">
             <span className="results-tag">Generated</span>
@@ -107,9 +110,31 @@ export default function Home() {
   )
 }
 
+function SkeletonResults() {
+  return (
+    <section className="results-section skeleton-section" aria-label="Generating questions…" aria-busy="true">
+      <div className="results-meta">
+        <span className="skeleton-tag" />
+        <span className="skeleton-title" />
+      </div>
+      <div className="question-list">
+        {[0, 1, 2].map(i => (
+          <div key={i} className="question-item skeleton-item" style={{ '--i': i }}>
+            <span className="skeleton-num" />
+            <div className="skeleton-lines">
+              <span className="skeleton-line" style={{ width: '90%' }} />
+              <span className="skeleton-line" style={{ width: '65%' }} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 function SpinnerIcon() {
   return (
-    <svg className="spin" width="15" height="15" viewBox="0 0 15 15" fill="none">
+    <svg className="spin" width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
       <circle cx="7.5" cy="7.5" r="5.5" stroke="currentColor" strokeOpacity=".3" strokeWidth="2" />
       <path d="M13 7.5a5.5 5.5 0 0 0-5.5-5.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
@@ -118,7 +143,7 @@ function SpinnerIcon() {
 
 function AlertIcon() {
   return (
-    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" flexShrink="0">
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
       <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" strokeWidth="1.5" />
       <path d="M7.5 4v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       <circle cx="7.5" cy="10.5" r=".75" fill="currentColor" />
