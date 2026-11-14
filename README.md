@@ -1,8 +1,10 @@
 # Askew
 
+[![CI](https://github.com/Lawaltunde/Askew/actions/workflows/ci.yml/badge.svg)](https://github.com/Lawaltunde/Askew/actions/workflows/ci.yml)
+
 A full-stack web application that generates 3 role-specific interview questions for a given job title using OpenAI via Spring AI.
 
-**Live Demo:** [askew-chgtojx5h-lawaltundes-projects.vercel.app](https://askew-chgtojx5h-lawaltundes-projects.vercel.app)
+**Live Demo:** [askew-ruby.vercel.app](https://askew-ruby.vercel.app)
 
 ---
 
